@@ -1,12 +1,22 @@
-import sys
+import os
 
-import yaml
 import pandas as pd
+import yaml
 
-try:
-    full_cmd_arguments = sys.argv
-    user_input = full_cmd_arguments[1]
-except:
-    user_input = input('Please enter filename')
+# Get the current working directory
+current_directory = os.getcwd()
 
-print(user_input)
+# Get the parent directory
+parent_directory = os.path.dirname(current_directory)
+
+# Construct the path to the YAML file in the parent directory
+yaml_file_path = os.path.join(parent_directory, 'source_path.yaml')
+
+# Read and print the YAML file content
+credentials = yaml.safe_load(open(yaml_file_path))
+connect_to = 'products'
+path = credentials[connect_to]['path']
+
+#load dataframe
+df = pd.read_csv(path)
+print(df)
