@@ -26,7 +26,7 @@ CREATE TABLE crm_sales_pipeline_warehouse.sales_data (
  regional_office varchar(50)
 );
 
-
+--create products table
 CREATE TABLE crm_sales_pipeline_warehouse.products (
 product_id serial PRIMARY KEY,
 product varchar(30),
@@ -34,6 +34,7 @@ series varchar(30),
 sales_price numeric
 );
 
+--create accounts table
 CREATE TABLE crm_sales_pipeline_warehouse.accounts (
  account_id serial primary key,
  account varchar(30),
@@ -45,11 +46,13 @@ CREATE TABLE crm_sales_pipeline_warehouse.accounts (
  subsidary_of varchar(50)
  );
 
-
-
-
-
-
+--create staging products table
+CREATE TABLE crm_sales_pipeline_staging.products_staging (
+product_id varchar(255),
+product varchar(255),
+series varchar(255),
+sales_price varchar(255)
+);
 
 
 

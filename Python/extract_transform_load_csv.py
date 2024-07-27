@@ -1,5 +1,5 @@
 import os
-
+import date_frame_transformations as dft
 import pandas as pd
 import yaml
 
@@ -19,4 +19,11 @@ path = credentials[connect_to]['path']
 
 #load dataframe
 df = pd.read_csv(path)
+
+#clean columns and remove any duplicates
+df = dft.clean_columns(df)
+df = dft.remove_duplicatese(df)
+
+
+
 print(df)
