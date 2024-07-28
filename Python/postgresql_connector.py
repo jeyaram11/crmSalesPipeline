@@ -43,9 +43,10 @@ def postgresql_connection():
         print(str(e))
     return engine
 
-def close_connection():
-    global engine
+def close_connection(engine):
     if engine is not None:
         engine.dispose()
         print("Connection closed")
+    else:
+        print("Engine is not initialized, no connection to close.")
 
