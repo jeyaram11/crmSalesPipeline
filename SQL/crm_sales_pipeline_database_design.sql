@@ -6,7 +6,7 @@ CREATE SCHEMA crm_sales_pipeline_warehouse;
 
 --create sales_pipeline fact table
 CREATE TABLE crm_sales_pipeline_warehouse.sales_data (
-	oppoturnity_id varchar(50) PRIMARY KEY,
+  oppoturnity_id varchar(50) PRIMARY KEY,
   sales_agent_id integer,
   product_id integer,
   account_id integer,
@@ -54,5 +54,23 @@ series varchar(255),
 sales_price varchar(255)
 );
 
+--adding created at table to OLTP database
+ALTER TABLE sales_data
+ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+ADD COLUMN updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
 
 
+--function to update updated_at column
+CREATE OR REPLACE FUNCTION update_updated_at_column()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = CURRENT_TIMESTAMP;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+--trigger to call the update function
+CREATE TRIGGER update_employee_updated_at
+BEFORE UPDATE ON sales_data
+FOR EACH ROW
+EXECUTE FUNCTION update_updated_at_column();
