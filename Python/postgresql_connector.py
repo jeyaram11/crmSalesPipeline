@@ -50,3 +50,20 @@ def close_connection(engine):
     else:
         print("Engine is not initialized, no connection to close.")
 
+
+def execute_script(connection,script_file):
+    #execute staging script
+    with open(script_file,'r') as file:
+        sql_script = file.read()
+
+    queries = sql_script.split(';')
+    for query in queries:
+        query = query.strip()
+        if query:
+            try:
+                connection.execute(sqlalchemy.text(query + ';'))
+                print('Successfully executed, staging script')
+            except Exception as e:
+                print(f"Error: {e}")
+        connection.commit()
+
