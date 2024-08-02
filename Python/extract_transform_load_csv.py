@@ -25,6 +25,7 @@ def main():
     source = credentials[connect_to]['source']
     schema = credentials[connect_to]['schema']
     staging_script = credentials[connect_to]['staging_script']
+    insert_script = credentials[connect_to]['insert_script']
 
     #load dataframe
     df = pd.read_csv(path)
@@ -48,8 +49,12 @@ def main():
         print(str(e))
 
 
-    #execute script
+    #execute SCD1 and SCD 2 script
     pc.execute_script(connection,staging_script)
+
+    #execute script to insert values into datawarehouse
+    pc.execute_script(connection,insert_script)
+
 
     pc.close_connection(engine)
 

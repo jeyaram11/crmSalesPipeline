@@ -62,7 +62,6 @@ def execute_script(connection,script_file):
         if query:
             try:
                 connection.execute(sqlalchemy.text(query + ';'))
-                print('Successfully executed, staging script')
             except Exception as e:
                 print(f"Error: {e}")
         connection.commit()
