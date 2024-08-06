@@ -17,7 +17,7 @@ SET
 FROM
   crm_sales_pipeline_staging.products_update u
 WHERE
-  p.product_id = u.product_id AND p.end_date IS NOT NULL;
+  p.product_id = u.product_id AND p.end_date IS NULL;
 
 --insert the new record from the update table
 INSERT INTO crm_sales_pipeline_warehouse.products

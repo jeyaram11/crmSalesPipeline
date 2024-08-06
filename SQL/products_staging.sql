@@ -45,4 +45,4 @@ FROM
   LEFT JOIN crm_sales_pipeline_warehouse.products p ON p.product_id = s.product_id
 WHERE
   s.product_id = p.product_id
-  AND s.checksum <> p.checksum AND p.end_date IS NOT NULL;
+  AND s.checksum <> p.checksum AND p.end_date IS NULL;
