@@ -6,20 +6,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Building.."
-                sh '''
-                pip install -r requirements.txt
-                '''
-            }
-        }
-        stage('Test') {
-            steps {
-                echo "Testing.."
-            }
-        }
-        stage('Deliver') {
-            steps {
-                echo "Deliver...."
+              checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: '86e6a0d3-9b2d-488c-9cc7-ee54420958e5', url: 'https://github.com/jeyaram11/crm_sales_pipeline.git']])
             }
         }
     }

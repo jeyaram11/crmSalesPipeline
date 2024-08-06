@@ -1,4 +1,5 @@
 import os
+import sys
 
 import sqlalchemy
 from sqlalchemy import text
@@ -9,6 +10,11 @@ import yaml
 import postgresql_connector as pc
 
 def main():
+
+    #get the name of the document
+    full_cmd_arguments = sys.argv
+    data_source = full_cmd_arguments[1]
+
     # Get the current working directory
     current_directory = os.getcwd()
 
@@ -20,7 +26,7 @@ def main():
 
     # Read and print the YAML file content
     credentials = yaml.safe_load(open(yaml_file_path))
-    connect_to = 'products'
+    connect_to = data_source
     path = credentials[connect_to]['path']
     source = credentials[connect_to]['source']
     schema = credentials[connect_to]['schema']
