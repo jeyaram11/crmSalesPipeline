@@ -3,7 +3,6 @@ import os
 
 import yaml
 import sqlalchemy
-import psycopg2
 # function to create a connection to mysql server
 
 # Define the global engine variable
