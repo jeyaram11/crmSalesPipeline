@@ -32,6 +32,7 @@ def main():
     schema = credentials[connect_to]['schema']
     staging_script = credentials[connect_to]['staging_script']
     insert_script = credentials[connect_to]['insert_script']
+    server = credentials[connect_to]['server_connection']
 
     #load dataframe
     df = pd.read_csv(path)
@@ -42,7 +43,7 @@ def main():
     df = dft.remove_duplicatese(df)
 
     #create a connection a load the data into the staging table
-    engine = pc.postgresql_connection()
+    engine = pc.postgresql_connection(server)
 
     connection = engine.connect()
 

@@ -11,7 +11,7 @@ global engine
 engine = None
 
 
-def postgresql_connection():
+def postgresql_connection(connection_to):
     current_directory = os.getcwd()
 
     parent_directory = os.path.dirname(current_directory)
@@ -21,7 +21,7 @@ def postgresql_connection():
 
     credentials = yaml.safe_load(open(yaml_file_path))
 
-    connection_to = 'crm_sales_pipeline'
+    connection_to = connection_to
     username = credentials[connection_to]['username']
     password = credentials[connection_to]['password']
     hostname = credentials[connection_to]['hostname']
