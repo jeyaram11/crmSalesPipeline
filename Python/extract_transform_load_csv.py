@@ -32,7 +32,7 @@ def main():
     schema = credentials[connect_to]['schema']
     staging_script = credentials[connect_to]['staging_script']
     insert_script = credentials[connect_to]['insert_script']
-    server = credentials[connect_to]['server_connection']
+    server = credentials[connect_to]['destination_connection']
 
     #load dataframe
     df = pd.read_csv(path)
@@ -43,14 +43,14 @@ def main():
     df = dft.remove_duplicatese(df)
 
     #create a connection a load the data into the staging table
-    engine = pc.postgresql_connection(server)
+    destination_engine = pc.postgresql_connection(server)
 
-    connection = engine.connect()
+    connection = destination_engine.connect()
 
     #import into the staging table
     try:
         # Import the DataFrame into PostgreSQL
-        df.to_sql(source + '_loading', engine, schema=schema, if_exists='replace', index=False)
+        df.to_sql(source + '_loading', destination_engine, schema=schema, if_exists='replace', index=False)
         print(f"DataFrame successfully imported to the {source} table in schema {schema}")
     except Exception as e:
         print(str(e))
@@ -63,7 +63,7 @@ def main():
     pc.execute_script(connection,insert_script)
 
 
-    pc.close_connection(engine)
+    pc.close_connection(destination_engine)
 
 
 if __name__ == "__main__":
