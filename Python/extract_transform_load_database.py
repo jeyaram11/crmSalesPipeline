@@ -24,14 +24,14 @@ def main():
     credentials = yaml.safe_load(open(yaml_file_path))
     connect_to = data_source
     server = credentials[connect_to]['server_connection']
-
+    sql_query = credentials[connect_to]['sql_query']
     #connect the the oltp server
     engine = pc.postgresql_connection(server)
     connection = engine.connect()
 
-    sql_query = 'SELECT * FROM sales_data;'
+    script = open(sql_query, 'r').read()
 
-    result = pd.DataFrame(connection.execute(text(sql_query)))
+    result = pd.DataFrame(connection.execute(text(script)))
     print(result)
 
 
