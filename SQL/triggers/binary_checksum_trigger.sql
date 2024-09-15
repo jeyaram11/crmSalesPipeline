@@ -35,4 +35,18 @@ FOR EACH ROW
 EXECUTE FUNCTION add_checksum_on_insert();
 
 
+-- Create the trigger function to compute the checksum on insert
+CREATE OR REPLACE FUNCTION add_checksum_on_insert_sales_teams()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Directly pass the values to the compute_checksum function
+    NEW.checksum := compute_checksum(NEW.agent_id::TEXT, NEW.sales_agent::TEXT, NEW.manager::TEXT,NEW.regional_office::Text);
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
+--create a trigger to compute checksum on sales_teams_staging table before insert
+CREATE TRIGGER add_checksum_on_insert_trigger_sales_teams
+BEFORE INSERT ON crm_sales_pipeline_staging._sales_teams_staging
+FOR EACH ROW
+EXECUTE FUNCTION add_checksum_on_insert_sales_teams();

@@ -51,7 +51,7 @@ def main():
     #import into the staging table
     try:
         # Import the DataFrame into PostgreSQL
-        result.to_sql(source + '_loading', destination_engine, schema=schema, if_exists='replace', index=False)
+        result.to_sql(source + '_loading', connection_to_destination, schema=schema, if_exists='replace', index=False)
         print(f"DataFrame successfully imported to the {source} table in schema {schema}")
     except Exception as e:
         print(str(e))

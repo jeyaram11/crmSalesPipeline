@@ -1,3 +1,30 @@
+--create staging products table
+CREATE TABLE IF NOT EXISTS crm_sales_pipeline_staging.products_staging (
+product_id varchar(255) NOT NULL,
+product varchar(255),
+series varchar(255),
+sales_price varchar(255)
+);
+
+--create insert and update table in the staging schema
+CREATE TABLE IF NOT EXISTS
+  crm_sales_pipeline_staging.products_insert (
+    product_id integer  NOT NULL,
+    product character varying(30),
+    series character varying(30),
+    sales_price numeric NULL,
+    checksum bytea NULL
+  );
+
+  CREATE TABLE IF NOT EXISTS
+  crm_sales_pipeline_staging.products_update (
+    product_id integer NOT NULL,
+    product character varying(30),
+    series character varying(30),
+    sales_price numeric,
+    checksum bytea
+  );
+
 TRUNCATE TABLE
   crm_sales_pipeline_staging.products_staging;
 

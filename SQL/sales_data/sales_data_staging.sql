@@ -10,3 +10,5 @@ CREATE TABLE IF NOT EXISTS crm_sales_pipeline_loading.sales_data_loading(
   created_at timestamp,
   updated_at timestamp
 );
+
+

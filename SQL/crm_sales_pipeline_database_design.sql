@@ -46,35 +46,25 @@ CREATE TABLE crm_sales_pipeline_warehouse.accounts (
  subsidary_of varchar(50)
  );
 
---create staging products table
-CREATE TABLE crm_sales_pipeline_staging.products_staging (
-product_id varchar(255) NOT NULL,
-product varchar(255),
-series varchar(255),
-sales_price varchar(255)
-);
 
 --adding created at table to OLTP database
 ALTER TABLE sales_data
 ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
 ADD COLUMN updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
 
---create insert and update table in the staging schema
-CREATE TABLE
-  crm_sales_pipeline_staging.products_insert (
-    product_id integer  NOT NULL,
-    product character varying(30),
-    series character varying(30),
-    sales_price numeric NULL,
-    checksum bytea NULL
-  );
 
-  CREATE TABLE
-  crm_sales_pipeline_staging.products_update (
-    product_id integer NOT NULL,
-    product character varying(30),
-    series character varying(30),
-    sales_price numeric,
-    checksum bytea
-  );
+
+CREATE TABLE sales_data (
+oppoturnity_id varchar(100),
+sales_data varchar (50),
+product varchar(100),
+account varchar(100),
+deal_stage varchar(20),
+engage_data timestamp,
+close_date timestamp,
+close_value numeric,
+created_at timestamp,
+updated_at timestamp
+);
+
 

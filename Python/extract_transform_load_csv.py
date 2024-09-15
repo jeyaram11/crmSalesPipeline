@@ -12,9 +12,11 @@ import postgresql_connector as pc
 def main():
 
     #get the name of the document
-    full_cmd_arguments = sys.argv
-    data_source = full_cmd_arguments[1]
-
+    try:
+        full_cmd_arguments = sys.argv
+        data_source = full_cmd_arguments[1]
+    except Exception as e:
+        data_source = input('Please enter file name')
     # Get the current working directory
     current_directory = os.getcwd()
 
@@ -57,12 +59,16 @@ def main():
 
 
     #execute SCD1 and SCD 2 script
-    pc.execute_script(connection,staging_script)
+    try:
+        pc.execute_script(connection,staging_script)
+    except Exception as e:
+       print('check sql SCD1 script',str(e))
 
     #execute script to insert values into datawarehouse
-    pc.execute_script(connection,insert_script)
-
-
+    try:
+        pc.execute_script(connection,insert_script)
+    except Exception as e:
+        print('check sql SCD2 script',str(e))
     pc.close_connection(destination_engine)
 
 
