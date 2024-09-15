@@ -3,7 +3,8 @@ INSERT INTO
   crm_sales_pipeline_warehouse.sales_teams
 SELECT
   agent_id,
-  sales_agent manager,
+  sales_agent,
+  manager,
   regional_office,
   checksum,
   null --end_date
