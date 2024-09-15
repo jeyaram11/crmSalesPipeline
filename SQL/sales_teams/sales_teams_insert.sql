@@ -33,4 +33,4 @@ SELECT
   checksum,
   null --end_date
 FROM
-  crm_sales_pipeline_staging.sales_teams_staging;
+  crm_sales_pipeline_staging.sales_teams_update;
