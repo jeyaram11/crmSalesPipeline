@@ -72,7 +72,7 @@ WHERE
     SELECT
       *
     FROM
-      crm_sales_pipeline_staging.sales_teams_insert w
+      crm_sales_pipeline_warehouse.sales_teams w
     WHERE
       w.agent_id = s.agent_id
   );
