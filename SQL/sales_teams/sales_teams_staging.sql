@@ -2,9 +2,9 @@
 CREATE TABLE IF NOT EXISTS
   crm_sales_pipeline_staging.sales_teams_staging (
     agent_id integer NOT NULL,
-    sales_agent varchar(255),
-    manager varchar(255),
-    regional_office varchar(255),
+    sales_agent TEXT,
+    manager TEXT,
+    regional_office TEXT,
     checksum bytea
   );
 
@@ -12,9 +12,9 @@ CREATE TABLE IF NOT EXISTS
 CREATE TABLE IF NOT EXISTS
   crm_sales_pipeline_staging.sales_teams_insert (
     agent_id integer NOT NULL,
-    sales_agent varchar(255),
-    manager varchar(255),
-    regional_office varchar(255),
+    sales_agent TEXT,
+    manager TEXT,
+    regional_office TEXT,
     checksum bytea
   );
 
@@ -22,9 +22,9 @@ CREATE TABLE IF NOT EXISTS
 CREATE TABLE IF NOT EXISTS
   crm_sales_pipeline_staging.sales_teams_update (
     agent_id integer NOT NULL,
-    sales_agent varchar(255),
-    manager varchar(255),
-    regional_office varchar(255),
+    sales_agent TEXT,
+    manager TEXT,
+    regional_office TEXT,
     checksum bytea
   );
 
@@ -32,9 +32,9 @@ CREATE TABLE IF NOT EXISTS
 CREATE TABLE IF NOT EXISTS
   crm_sales_pipeline_warehouse.sales_teams (
     agent_id integer NOT NULL,
-    sales_agent varchar(255),
-    manager varchar(255),
-    regional_office varchar(255),
+    sales_agent TEXT,
+    manager TEXT,
+    regional_office TEXT,
     checksum bytea,
     end_date timestamp null
   );
@@ -54,9 +54,9 @@ INSERT INTO
   crm_sales_pipeline_staging.sales_teams_staging
 SELECT
   agent_id::int,
-  sales_agent::varchar(255),
-  manager::varchar(255),
-  regional_office::varchar(255)
+  sales_agent::TEXT,
+  manager::TEXT,
+  regional_office::TEXT
 FROM
   crm_sales_pipeline_loading.sales_teams_loading;
 

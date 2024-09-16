@@ -30,6 +30,8 @@ def main():
     source = credentials[connect_to]['source']
     schema = credentials[connect_to]['schema']
     destination_connection = credentials[connect_to]['destination_connection']
+    staging_script = credentials[connect_to]['staging_script']
+    insert_script = credentials[connect_to]['insert_script']
 
     #create an engine and connect to the source_server
     source_engine = pc.postgresql_connection(source_connection)
@@ -55,6 +57,18 @@ def main():
         print(f"DataFrame successfully imported to the {source} table in schema {schema}")
     except Exception as e:
         print(str(e))
+
+    #execute staging script
+    try:
+        pc.execute_script(connection_to_destination, staging_script)
+    except Exception as e:
+        print('check sql staging script', str(e))
+
+    #execute staging script
+    try:
+        pc.execute_script(connection_to_destination, insert_script)
+    except Exception as e:
+        print('check sql staging script', str(e))
 
 
     pc.close_connection(source_engine)

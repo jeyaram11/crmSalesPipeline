@@ -2,13 +2,13 @@
 CREATE TABLE IF NOT EXISTS
   crm_sales_pipeline_warehouse.accounts (
     account_id integer,
-    account varchar(30),
-    sector varchar(30),
+    account::TEXT,
+    sector::TEXT,
     year_established INT,
     revenue decimal(10, 2),
     employees int,
-    office_location varchar(30),
-    subsidiary_of varchar(30) null,
+    office_location::TEXT,
+    subsidiary_of::TEXT null,
     checksum bytea,
     end_date timestamp null
   );
@@ -17,13 +17,13 @@ CREATE TABLE IF NOT EXISTS
 CREATE TABLE IF NOT EXISTS
   crm_sales_pipeline_staging.accounts_staging (
     account_id integer,
-    account varchar(30),
-    sector varchar(30),
+    account::TEXT,
+    sector::TEXT,
     year_established INT,
     revenue decimal(10, 2),
     employees int,
-    office_location varchar(30),
-    subsidiary_of varchar(30),
+    office_location::TEXT,
+    subsidiary_of::TEXT,
     checksum bytea
   );
 
@@ -31,13 +31,13 @@ CREATE TABLE IF NOT EXISTS
 CREATE TABLE IF NOT EXISTS
   crm_sales_pipeline_staging.accounts_insert (
     account_id integer,
-    account varchar(30),
-    sector varchar(30),
+    account::TEXT,
+    sector::TEXT,
     year_established int,
     revenue decimal(10, 2),
     employees int,
-    office_location varchar(30),
-    subsidiary_of varchar(30),
+    office_location::TEXT,
+    subsidiary_of::TEXT,
     checksum bytea
   );
 
@@ -45,13 +45,13 @@ CREATE TABLE IF NOT EXISTS
 CREATE TABLE IF NOT EXISTS
   crm_sales_pipeline_staging.accounts_update (
     account_id integer,
-    account varchar(30),
-    sector varchar(30),
+    account::TEXT,
+    sector::TEXT,
     year_established int,
     revenue decimal(10, 2),
     employees int,
-    office_location varchar(30),
-    subsidiary_of varchar(30),
+    office_location::TEXT,
+    subsidiary_of::TEXT,
     checksum bytea
   );
 
@@ -69,13 +69,13 @@ TRUNCATE TABLE
 
 INSERT INTO crm_sales_pipeline_staging.accounts_staging
     SELECT account_id::integer,
-    account::varchar(30),
-    sector::varchar(30),
+    replace(lower(account,' ',''),
+    sector,
     year_established::int,
     revenue::decimal(10,2),
     employees::int,
-    office_location::varchar(30),
-    subsidiary_of::varchar(30)
+    office_location,
+    subsidiary_of
     FROM
     crm_sales_pipeline_loading.accounts_loading;
 
