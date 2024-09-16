@@ -37,7 +37,8 @@ CREATE TABLE IF NOT EXISTS crm_sales_pipeline_warehouse.sales_data(
   updated_at timestamp
 );
 
-
+--truncate the staging table first
+TRUNCATE TABLE crm_sales_pipeline_staging.sales_data_staging;
 
 
 --insert the data into the staging table with the correct data type
@@ -57,6 +58,5 @@ INSERT INTO crm_sales_pipeline_staging.sales_data_staging
    LEFT JOIN crm_sales_pipeline_warehouse.sales_teams st ON replace(lower(l.sales_agent),' ','') = replace(lower(st.sales_agent),' ','')
    LEFT JOIN crm_sales_pipeline_warehouse.products p ON replace(lower(l.product),' ','') = replace(lower(p.product),' ','')
    LEFT JOIN crm_sales_pipeline_warehouse.accounts a ON replace(lower(l.account),' ','') = replace(lower(a.account),' ','')
-
 
 
