@@ -1,9 +1,9 @@
 --create staging products table
 CREATE TABLE IF NOT EXISTS crm_sales_pipeline_staging.products_staging (
-product_id varchar(255) NOT NULL,
-product varchar(255),
-series varchar(255),
-sales_price varchar(255)
+product_id INT NOT NULL,
+product TEXT,
+series TEXT,
+sales_price TEXT
 );
 
 --create insert and update table in the staging schema

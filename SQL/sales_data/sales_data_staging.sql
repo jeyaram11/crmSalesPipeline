@@ -1,18 +1,18 @@
 CREATE TABLE IF NOT EXISTS crm_sales_pipeline_loading.sales_data_loading(
-  oppoturnity_id varchar(50),
-  sales_agent varchar(50),
-  product varchar(50),
-  account varchar(50),
-  deal_stage varchar(50),
-  engage_date varchar(50),
+  oppoturnity_id TEXT,
+  sales_agent TEXT,
+  product TEXT,
+  account TEXT,
+  deal_stage TEXT,
+  engage_date TEXT,
   close_date timestamp,
-  close_value varchar(50),
+  close_value TEXT,
   created_at timestamp,
   updated_at timestamp
 );
 
 CREATE TABLE IF NOT EXISTS crm_sales_pipeline_staging.sales_data_staging(
-  oppoturnity_id varchar(50),
+  oppoturnity_id TEXT,
   agent_id int,
   product_id int,
   account_id int,
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS crm_sales_pipeline_staging.sales_data_staging(
 );
 
 CREATE TABLE IF NOT EXISTS crm_sales_pipeline_warehouse.sales_data(
-  oppoturnity_id varchar(50),
+  oppoturnity_id TEXT,
   agent_id int,
   product_id int,
   account_id int,
