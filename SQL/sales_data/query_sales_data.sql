@@ -11,5 +11,5 @@ SELECT
   updated_at
 FROM
   sales_data
---WHERE created_at::timestamp >= current_timestamp - interval '30 day' or
---updated_at >= current_timestamp - interval '30 day';
+WHERE created_at::timestamp >= current_timestamp - interval '30 day' or
+updated_at >= current_timestamp - interval '30 day';
