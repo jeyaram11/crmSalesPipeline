@@ -47,6 +47,24 @@ $$ LANGUAGE plpgsql;
 
 --create a trigger to compute checksum on sales_teams_staging table before insert
 CREATE TRIGGER add_checksum_on_insert_trigger_sales_teams
-BEFORE INSERT ON crm_sales_pipeline_staging._sales_teams_staging
+BEFORE INSERT ON crm_sales_pipeline_staging.sales_teams_staging
 FOR EACH ROW
 EXECUTE FUNCTION add_checksum_on_insert_sales_teams();
+
+
+
+--create the tigger function for the accounts data
+CREATE OR REPLACE FUNCTION add_checksum_on_insert_accounts()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.checksum := compute_checksum(NEW.account::TEXT, NEW.sector::TEXT, NEW.year_established::TEXT, NEW.revenue::TEXT,NEW.employees::TEXT,NEW.office_location,NEW.subsidiary_of);
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+--create a trigger to compute checksum of each row
+CREATE TRIGGER add_checksum_on_insert_trigger_accounts
+BEFORE INSERT ON crm_sales_pipeline_staging.accounts_staging
+FOR EACH ROW
+EXECUTE FUNCTION add_checksum_on_insert_accounts();
