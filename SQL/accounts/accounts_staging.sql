@@ -2,13 +2,13 @@
 CREATE TABLE IF NOT EXISTS
   crm_sales_pipeline_warehouse.accounts (
     account_id integer,
-    account::TEXT,
-    sector::TEXT,
+    account TEXT,
+    sector TEXT,
     year_established INT,
     revenue decimal(10, 2),
     employees int,
-    office_location::TEXT,
-    subsidiary_of::TEXT null,
+    office_location TEXT,
+    subsidiary_of TEXT null,
     checksum bytea,
     end_date timestamp null
   );
@@ -17,13 +17,13 @@ CREATE TABLE IF NOT EXISTS
 CREATE TABLE IF NOT EXISTS
   crm_sales_pipeline_staging.accounts_staging (
     account_id integer,
-    account::TEXT,
-    sector::TEXT,
+    account TEXT,
+    sector TEXT,
     year_established INT,
     revenue decimal(10, 2),
     employees int,
-    office_location::TEXT,
-    subsidiary_of::TEXT,
+    office_location TEXT,
+    subsidiary_of TEXT,
     checksum bytea
   );
 
@@ -31,13 +31,13 @@ CREATE TABLE IF NOT EXISTS
 CREATE TABLE IF NOT EXISTS
   crm_sales_pipeline_staging.accounts_insert (
     account_id integer,
-    account::TEXT,
-    sector::TEXT,
+    account TEXT,
+    sector TEXT,
     year_established int,
     revenue decimal(10, 2),
     employees int,
-    office_location::TEXT,
-    subsidiary_of::TEXT,
+    office_location TEXT,
+    subsidiary_of TEXT,
     checksum bytea
   );
 
@@ -45,13 +45,13 @@ CREATE TABLE IF NOT EXISTS
 CREATE TABLE IF NOT EXISTS
   crm_sales_pipeline_staging.accounts_update (
     account_id integer,
-    account::TEXT,
-    sector::TEXT,
+    account TEXT,
+    sector TEXT,
     year_established int,
     revenue decimal(10, 2),
     employees int,
-    office_location::TEXT,
-    subsidiary_of::TEXT,
+    office_location TEXT,
+    subsidiary_of TEXT,
     checksum bytea
   );
 
@@ -69,7 +69,7 @@ TRUNCATE TABLE
 
 INSERT INTO crm_sales_pipeline_staging.accounts_staging
     SELECT account_id::integer,
-    replace(lower(account,' ',''),
+    account,
     sector,
     year_established::int,
     revenue::decimal(10,2),
